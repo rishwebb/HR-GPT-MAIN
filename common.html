@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR-GPT • Common Questions</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+
+    .glass {
+      background: rgba(26, 26, 26, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid #252525;
+    }
+
+    .btn {
+      transition: all 0.25s ease;
+    }
+
+    .btn:hover {
+      background: #ffffff;
+      color: #000000;
+    }
+  </style>
+</head>
+
+<body class="h-full bg-[#0f0f0f] text-white overflow-hidden">
+
+<div class="h-full flex flex-col">
+
+  <!-- HEADER -->
+  <header class="border-b border-[#1a1a1a] bg-[#0f0f0f]/90 backdrop-blur">
+    <div class="flex items-center justify-center gap-3 px-4 py-3">
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] flex items-center justify-center border border-[#333] text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M9 12h6m-6 4h6M9 8h6M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+      </div>
+      <h1 class="text-lg font-semibold">Common Questions</h1>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="flex-1 overflow-y-auto px-4 py-6 max-w-3xl mx-auto w-full space-y-6">
+
+    <!-- QUESTIONS -->
+    <div class="glass rounded-2xl p-4 space-y-3">
+      <h2 class="text-sm text-gray-400 mb-2">Internship FAQs</h2>
+
+      <button class="btn w-full text-left px-4 py-3 rounded-xl border border-[#2a2a2a]"
+        onclick="showAnswer('duration')">
+        What is the duration of the internship?
+      </button>
+
+      <button class="btn w-full text-left px-4 py-3 rounded-xl border border-[#2a2a2a]"
+        onclick="showAnswer('tasks')">
+        How many tasks are assigned?
+      </button>
+
+      <button class="btn w-full text-left px-4 py-3 rounded-xl border border-[#2a2a2a]"
+        onclick="showAnswer('certificate')">
+        When will I receive my certificate?
+      </button>
+
+      <button class="btn w-full text-left px-4 py-3 rounded-xl border border-[#2a2a2a]"
+        onclick="showAnswer('lor')">
+        How can I get a Letter of Recommendation?
+      </button>
+
+      <button class="btn w-full text-left px-4 py-3 rounded-xl border border-[#2a2a2a]"
+        onclick="showAnswer('attendance')">
+        Is attendance mandatory?
+      </button>
+
+      <button class="btn w-full text-left px-4 py-3 rounded-xl border border-[#2a2a2a]"
+        onclick="showAnswer('payment')">
+        Is this internship paid?
+      </button>
+
+      <button class="btn w-full text-left px-4 py-3 rounded-xl border border-[#2a2a2a]"
+        onclick="showAnswer('communication')">
+        How should I communicate with the team?
+      </button>
+    </div>
+
+    <!-- ANSWER PANEL -->
+    <div id="answerBox" class="glass rounded-2xl p-4 hidden">
+      <p id="answerText" class="text-[15px] leading-relaxed text-gray-200"></p>
+
+      <button onclick="copyAnswer()"
+        class="mt-4 px-4 py-2 rounded-lg border border-[#2a2a2a] text-sm btn">
+        Copy answer
+      </button>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-[#1a1a1a] p-3 text-center text-xs text-gray-600">
+    Admin: Rishav • © All Rights Reserved
+  </footer>
+
+</div>
+
+<script>
+  const answers = {
+    duration:
+      "The internship duration is 2 weeks. During this period, interns are expected to complete the assigned tasks and actively participate in all internship-related activities.",
+
+    tasks:
+      "Interns are required to complete 5 tasks within the 2-week internship period. All tasks are designed to be manageable with proper time management and consistent effort.",
+
+    certificate:
+      "The completion certificate will be provided after successful completion of the internship, provided that at least 75% of the assigned goals and tasks are achieved.",
+
+    lor:
+      "A Letter of Recommendation is awarded based on active participation, timely task completion, and consistent communication throughout the internship. It is not automatic and depends on performance.",
+
+    attendance:
+      "Yes, regular participation and engagement are expected. While there is no physical attendance, interns must remain active in the group and responsive to updates.",
+
+    payment:
+      "This is an unpaid internship focused on learning, skill development, and real-world experience. Certificates and recommendations are provided based on performance.",
+
+    communication:
+      "All communication should be professional and timely. Interns are expected to respond to messages, submit reports on time, and coordinate respectfully with the team."
+  };
+
+  function showAnswer(key) {
+    document.getElementById('answerText').textContent = answers[key];
+    document.getElementById('answerBox').classList.remove('hidden');
+  }
+
+  function copyAnswer() {
+    const text = document.getElementById('answerText').textContent;
+    navigator.clipboard.writeText(text);
+  }
+</script>
+
+</body>
+</html>
