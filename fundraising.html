@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR-GPT • Fundraising QnA</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+
+    .glass {
+      background: rgba(26, 26, 26, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid #252525;
+    }
+
+    .btn {
+      transition: all 0.25s ease;
+    }
+
+    .btn:hover {
+      background: #ffffff;
+      color: #000000;
+    }
+  </style>
+</head>
+
+<body class="h-full bg-[#0f0f0f] text-white overflow-hidden">
+
+<div class="h-full flex flex-col">
+
+  <!-- HEADER -->
+  <header class="border-b border-[#1a1a1a] bg-[#0f0f0f]/90 backdrop-blur">
+    <div class="flex items-center justify-center gap-3 px-4 py-3">
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] flex items-center justify-center border border-[#333] text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2
+               c0-.656-.126-1.283-.356-1.857M7 20H2v-2
+               a3 3 0 015.356-1.857M7 20v-2
+               c0-.656.126-1.283.356-1.857m0 0
+               a5.002 5.002 0 019.288 0M15 7
+               a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+      </div>
+      <h1 class="text-lg font-semibold">Fundraising QnA</h1>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="flex-1 overflow-y-auto px-4 py-6 max-w-3xl mx-auto w-full space-y-6">
+
+    <!-- QUESTION BUTTONS -->
+    <div class="glass rounded-2xl p-4 space-y-3">
+      <h2 class="text-sm text-gray-400 mb-2">Common Questions & Objections</h2>
+
+      <button class="btn w-full text-left px-4 py-3 rounded-xl border border-[#2a2a2a]"
+        onclick="showAnswer('money')">
+        I don’t have money right now
+      </button>
+
+      <button class="btn w-full text-left px-4 py-3 rounded-xl border border-[#2a2a2a]"
+        onclick="showAnswer('trust')">
+        Why should I trust this cause?
+      </button>
+
+      <button class="btn w-full text-left px-4 py-3 rounded-xl border border-[#2a2a2a]"
+        onclick="showAnswer('later')">
+        I’ll donate later
+      </button>
+
+      <button class="btn w-full text-left px-4 py-3 rounded-xl border border-[#2a2a2a]"
+        onclick="showAnswer('share')">
+        I can’t donate but can I help?
+      </button>
+
+      <button class="btn w-full text-left px-4 py-3 rounded-xl border border-[#2a2a2a]"
+        onclick="showAnswer('details')">
+        Can you share more details?
+      </button>
+
+      <button class="btn w-full text-left px-4 py-3 rounded-xl border border-[#2a2a2a]"
+        onclick="showAnswer('thanks')">
+        Thank you message after donation
+      </button>
+    </div>
+
+    <!-- ANSWER PANEL -->
+    <div id="answerBox" class="glass rounded-2xl p-4 hidden">
+      <p id="answerText" class="text-[15px] leading-relaxed text-gray-200"></p>
+
+      <button onclick="copyAnswer()"
+        class="mt-4 px-4 py-2 rounded-lg border border-[#2a2a2a] text-sm btn">
+        Copy response
+      </button>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-[#1a1a1a] p-3 text-center text-xs text-gray-600">
+    Admin: Rishav • © All Rights Reserved
+  </footer>
+
+</div>
+
+<script>
+  const answers = {
+    money:
+      "I completely understand, and thank you for your honesty. Not everyone may be in a position to contribute financially, and that’s absolutely okay. If possible, you can still support this initiative by sharing it with others. Every small effort truly helps.",
+
+    trust:
+      "That’s a very valid concern. This initiative is conducted under a registered organization, and all contributions are used transparently for the stated cause. I’d be happy to share official details or verification information if you’d like.",
+
+    later:
+      "Sure, no problem at all. Please feel free to contribute whenever it’s convenient for you. I’ll be happy to stay in touch and share updates about the initiative in the meantime.",
+
+    share:
+      "Absolutely. Even if you’re unable to donate, sharing this initiative with friends or family can make a big difference. Your support in spreading the word is truly appreciated.",
+
+    details:
+      "Of course. This initiative focuses on supporting meaningful causes through transparent and responsible fundraising. I can share complete details, official links, and any additional information you may need.",
+
+    thanks:
+      "Thank you so much for your generous contribution. Your support means a lot and will directly help us make a positive impact. We truly appreciate your kindness and trust."
+  };
+
+  function showAnswer(key) {
+    document.getElementById('answerText').textContent = answers[key];
+    document.getElementById('answerBox').classList.remove('hidden');
+  }
+
+  function copyAnswer() {
+    const text = document.getElementById('answerText').textContent;
+    navigator.clipboard.writeText(text);
+  }
+</script>
+
+</body>
+</html>
