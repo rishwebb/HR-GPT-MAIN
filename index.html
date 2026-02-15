@@ -39,14 +39,57 @@
     .glass-btn:active {
       transform: scale(0.96);
     }
+
+    /* Input Styling */
+    .glass-input {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: white;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .glass-input:focus {
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    
+    /* Utility to hide elements */
+    .hidden { display: none; }
   </style>
 </head>
 
 <body class="h-full bg-black text-white flex items-center justify-center">
 
-  <div class="w-full max-w-md px-6 fade-up">
+  <div id="login-section" class="w-full max-w-md px-6 fade-up">
+    <div class="text-center mb-10">
+      <h1 class="text-2xl font-semibold tracking-tight">Login</h1>
+      <p class="text-sm text-gray-400 mt-2">
+        Enter credentials to access HR-GPT
+      </p>
+    </div>
 
-    <!-- Header -->
+    <div class="space-y-4">
+      <input type="text" id="username" placeholder="ID" 
+             class="glass-input block w-full rounded-2xl px-6 py-4 text-lg font-medium placeholder-gray-500">
+      
+      <input type="password" id="password" placeholder="Password" 
+             class="glass-input block w-full rounded-2xl px-6 py-4 text-lg font-medium placeholder-gray-500">
+      
+      <div class="flex items-center space-x-2 px-2">
+        <input type="checkbox" id="remember-me" class="w-4 h-4 rounded border-gray-600 bg-transparent">
+        <label for="remember-me" class="text-sm text-gray-400 select-none">Remember me</label>
+      </div>
+
+      <button onclick="attemptLogin()"
+         class="glass-btn block w-full rounded-2xl px-6 py-5 text-center text-lg font-medium mt-6">
+        Unlock
+      </button>
+      
+      <p id="error-msg" class="text-red-500 text-sm text-center mt-2 hidden">Invalid Credentials</p>
+    </div>
+  </div>
+
+  <div id="menu-section" class="w-full max-w-md px-6 hidden">
+
     <div class="text-center mb-10">
       <h1 class="text-2xl font-semibold tracking-tight">HR-GPT</h1>
       <p class="text-sm text-gray-400 mt-2">
@@ -54,7 +97,6 @@
       </p>
     </div>
 
-    <!-- Menu -->
     <div class="space-y-4">
 
       <a href="https://chatgpt.com/g/g-69904ff317e881919037b9a3c2aca44b-inamigos-gpt"
@@ -74,12 +116,56 @@
 
     </div>
 
-    <!-- Footer -->
     <p class="text-[11px] text-gray-500 text-center mt-10">
       Admin: Rishav • © All Rights Reserved
     </p>
 
   </div>
+
+  <script>
+    // Credentials
+    const VALID_ID = "inamigos";
+    const VALID_PASS = "12345678";
+
+    // Elements
+    const loginSection = document.getElementById('login-section');
+    const menuSection = document.getElementById('menu-section');
+    const userIn = document.getElementById('username');
+    const passIn = document.getElementById('password');
+    const rememberCheck = document.getElementById('remember-me');
+    const errorMsg = document.getElementById('error-msg');
+
+    // Check on Load
+    window.onload = function() {
+      if (localStorage.getItem('hrgpt_remember') === 'true') {
+        showMenu();
+      }
+    };
+
+    function attemptLogin() {
+      // Case insensitive check
+      const u = userIn.value.trim().toLowerCase();
+      const p = passIn.value.trim().toLowerCase();
+
+      if (u === VALID_ID && p === VALID_PASS) {
+        if (rememberCheck.checked) {
+          localStorage.setItem('hrgpt_remember', 'true');
+        }
+        showMenu();
+      } else {
+        errorMsg.classList.remove('hidden');
+        // Shake animation effect
+        loginSection.style.transform = "translateX(5px)";
+        setTimeout(() => loginSection.style.transform = "translateX(0)", 100);
+      }
+    }
+
+    function showMenu() {
+      loginSection.classList.add('hidden');
+      menuSection.classList.remove('hidden');
+      menuSection.classList.add('fade-up');
+    }
+  </script>
 
 </body>
 </html>
